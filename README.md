@@ -1,4 +1,4 @@
-# Saumya Jaiswal — Portfolio
+# Saumya Jaiswal - Portfolio
 
 Personal portfolio site covering video content, graphic design, and creative writing work.
 
