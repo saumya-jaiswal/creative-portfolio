@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saumya Jaiswal — Video Content Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAFAF9;
+      --bg-dark: #1A1A1A;
+      --cream: #F5F0EB;
+      --accent: #C4956A;
+      --accent-light: #D4A97A;
+      --accent-dark: #8B6914;
+      --text: #2D2D2D;
+      --text-light: #6B6B6B;
+      --text-muted: #9A9A9A;
+      --white: #FFFFFF;
+      --border: #E8E0D8;
+      --card-bg: #FFFFFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      padding: 0 clamp(20px, 4vw, 60px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(250,250,249,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); font-weight: 500; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(250,250,249,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 20px clamp(20px, 4vw, 60px);
+      z-index: 99;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: 15px;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 400;
+      padding: 6px 0;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: inline-block;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      border-bottom: 1.5px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      margin: 0 0 20px 0;
+    }
+
+    .section-title.light { color: var(--white); }
+
+    /* ── BODY TEXT ── */
+    .body-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-light);
+      margin: 0 0 16px 0;
+      max-width: 620px;
+    }
+
+    .body-text.light { color: rgba(255,255,255,0.8); }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      background: rgba(196,149,106,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(196,149,106,0.2);
+      margin: 0 6px 8px 0;
+    }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 clamp(30px, 8vw, 120px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-orb-1 {
+      position: absolute;
+      top: 15%; right: 8%;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,149,106,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-orb-2 {
+      position: absolute;
+      bottom: 10%; left: 5%;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,149,106,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-line {
+      position: absolute;
+      top: 20%; right: 15%;
+      width: 1px; height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--border), transparent);
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 700px; position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.08;
+      margin: 0 0 28px 0;
+      letter-spacing: -1px;
+    }
+
+    .hero-title em { color: var(--accent); }
+
+    .hero-subtitle {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text-light);
+      max-width: 520px;
+      margin: 0 0 40px 0;
+    }
+
+    .btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      padding: 14px 32px;
+      background: var(--text);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-outline {
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── VIDEO SECTION ── */
+    #video {
+      padding: 100px clamp(30px, 8vw, 120px);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .video-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    .video-card.featured { grid-column: 1 / -1; }
+
+    .video-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-card.featured .video-thumb { aspect-ratio: 21/9; }
+
+    .video-thumb-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(196,149,106,0.15) 0%, transparent 60%);
+    }
+
+    .play-btn {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      width: 56px; height: 56px;
+    }
+
+    .video-card.featured .play-btn { width: 72px; height: 72px; }
+
+    .play-icon {
+      width: 0; height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 16px solid rgba(255,255,255,0.9);
+      margin-left: 4px;
+    }
+
+    .video-card.featured .play-icon {
+      border-top-width: 14px;
+      border-bottom-width: 14px;
+      border-left-width: 22px;
+    }
+
+    .video-placeholder-text {
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 12px;
+      letter-spacing: 1px;
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .duration-badge {
+      position: absolute;
+      bottom: 12px; right: 12px;
+      background: rgba(0,0,0,0.6);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+      z-index: 1;
+    }
+
+    .video-body { padding: 20px 24px; }
+    .video-card.featured .video-body { padding: 28px 32px; }
+
+    .video-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 8px 0;
+    }
+
+    .video-card.featured .video-title { font-size: 22px; }
+
+    .video-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-light);
+      margin: 0 0 14px 0;
+    }
+
+    /* ── TOOLS STRIP ── */
+    .tools-strip {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .tools-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .tool-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ── DESIGN SECTION ── */
+    #design {
+      padding: 100px clamp(30px, 8vw, 120px);
+      background: var(--cream);
+    }
+
+    .case-study {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 40px;
+      border: 1px solid var(--border);
+      margin-top: 48px;
+      margin-bottom: 40px;
+    }
+
+    .case-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .case-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 12px 0;
+    }
+
+    .case-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 0 24px 0;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      margin: 0 12px;
+    }
+
+    .hint-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .poster-card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease;
+    }
+
+    .poster-card:hover { transform: translateY(-3px); }
+
+    .poster-thumb {
+      width: 100%;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .poster-thumb-text {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .poster-org-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.85);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .poster-body { padding: 16px 18px; }
+
+    .poster-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 4px 0;
+    }
+
+    .poster-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── WRITING SECTION ── */
+    #writing {
+      padding: 100px clamp(30px, 8vw, 120px);
+      background: var(--bg-dark);
+    }
+
+    .writing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .writing-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .writing-type {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .writing-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0 0 12px 0;
+    }
+
+    .writing-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      margin: 0 0 20px 0;
+    }
+
+    .writing-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 10px 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ── ART NOTE ── */
+    .art-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+    }
+
+    /* ── ABOUT SECTION ── */
+    #about {
+      padding: 100px clamp(30px, 8vw, 120px);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .exp-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .timeline-item {
+      padding-left: 24px;
+      margin-bottom: 28px;
+      padding-bottom: 4px;
+    }
+
+    .timeline-item.current { border-left: 2px solid var(--accent); }
+    .timeline-item.past { border-left: 2px solid var(--border); }
+
+    .timeline-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .timeline-org {
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .timeline-detail {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* ── CONTACT SECTION ── */
+    #contact {
+      padding: 100px clamp(30px, 8vw, 120px);
+      background: var(--bg-dark);
+      text-align: center;
+    }
+
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin: 0 0 20px 0;
+    }
+
+    .contact-title em { color: var(--accent); font-style: italic; }
+
+    .contact-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .contact-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .btn-accent {
+      padding: 14px 32px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-accent:hover { opacity: 0.85; }
+
+    .btn-outline-white {
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: border-color 0.2s;
+    }
+
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.5); }
+
+    .contact-links {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .contact-links a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 24px clamp(30px, 8vw, 120px);
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .video-grid { grid-template-columns: 1fr; }
+      .video-card.featured .video-thumb { aspect-ratio: 16/9; }
+      .writing-grid { grid-template-columns: 1fr; }
+      .poster-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+      .tools-strip { gap: 16px; }
+      .stats-row { flex-direction: column; align-items: flex-start; }
+      .stat-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">Saumya Jaiswal</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home" onclick="closeMobile()">Home</a>
+    <a href="#video" onclick="closeMobile()">Video</a>
+    <a href="#design" onclick="closeMobile()">Design</a>
+    <a href="#writing" onclick="closeMobile()">Writing</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section id="home">
+    <div class="hero-orb-1"></div>
+    <div class="hero-orb-2"></div>
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Video Content Creator &middot; Digital Storyteller &middot; Writer</div>
+      <h1 class="hero-title">
+        Stories that<br />
+        <em>move</em> people.
+      </h1>
+      <p class="hero-subtitle">
+        I create short-form video content, social media campaigns, and visual narratives
+        that capture authentic human experiences. Currently pursuing MSc Data Science
+        at King's College London.
+      </p>
+      <div class="btn-group">
+        <a href="#video" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VIDEO SECTION ── -->
+  <section id="video">
+    <div class="section-label">Video Portfolio</div>
+    <h2 class="section-title">Documentary &amp; Travel Storytelling</h2>
+    <p class="body-text">
+      From documenting personal milestones to capturing the soul of the places I travel,
+      I create short-form video content that balances cinematic quality with authentic emotion.
+      Below is a selection of 15+ reels spanning documentary, travel, cultural, and lifestyle
+      content — every one filmed, directed, and edited by me using CapCut, InShot, and VN.
+    </p>
+
+    <!-- Featured video -->
+    <div style="margin-top: 48px; margin-bottom: 32px; max-width: 100%;">
+      <div class="video-card featured">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#1a1a1a;">
+          <iframe src="https://drive.google.com/file/d/1mWOATVCAbwO2ku_VY9N1uaa2-L2zAcvK/preview" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:12px;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Our Story — A Wedding Documentary</h3>
+          <p class="video-desc">A self-produced documentary covering multiple wedding functions — from the proposal to the sangeet, mehendi, and ceremony. Captures intimate family moments, cultural rituals, and celebration with cinematic transitions and narrative pacing. Entirely conceptualised, filmed, and edited independently.</p>
+          <div>
+            <span class="tag">Documentary</span>
+            <span class="tag">Narrative Editing</span>
+            <span class="tag">Multi-event Coverage</span>
+            <span class="tag">Personal Storytelling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video grid -->
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1Oed-PcOYLiuK9srMzDDtpUKOMsA793ZR/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">London — A City in Motion</h3>
+          <p class="video-desc">A curated montage of London's iconic landmarks and hidden corners, captured over six months of living in the city. Showcases pacing, location variety, and atmospheric editing.</p>
+          <div><span class="tag">Travel</span><span class="tag">Montage</span><span class="tag">London</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1BNx2H3DUVtJ6gr--XMdiXgYvhbN1FXOT/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Nusa Penida, Indonesia</h3>
+          <p class="video-desc">A comprehensive visual tour of Nusa Penida's dramatic landscapes — from clifftop viewpoints to turquoise coastlines. Covers multiple attractions in a single cohesive narrative.</p>
+          <div><span class="tag">Travel</span><span class="tag">Cinematic</span><span class="tag">Location Tour</span></div>
+        </div>
+      </div>
+
+      
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1Zhcf17cjDbzfDyUii33a9FYeexS02Vbo/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Karwa Chauth — A Day of Devotion</h3>
+          <p class="video-desc">Documents the preparation, styling, and evening pooja ceremony of Karwa Chauth. Blends lifestyle content with cultural authenticity.</p>
+          <div><span class="tag">Cultural</span><span class="tag">Lifestyle</span><span class="tag">Ritual</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/17Ngvha7Egp0ufpvPtT_KcjTtUENRtDc1/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Cherry Blossoms, Battersea Park</h3>
+          <p class="video-desc">A dreamy, Bridgerton-inspired reel capturing London's cherry blossom season. Demonstrates ability to match visual content to a creative concept and trending aesthetic.</p>
+          <div><span class="tag">Themed Content</span><span class="tag">Aesthetic</span><span class="tag">London</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/14D9J9ubDq8XHBsoUZMFz00hG66xphOr4/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Holi in London</h3>
+          <p class="video-desc">A vibrant, high-energy reel capturing the colours and joy of Holi celebrations in London. Shows the ability to film dynamic group events and convey communal energy.</p>
+          <div><span class="tag">Event Coverage</span><span class="tag">Community</span><span class="tag">Festival</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1hOGXj9c3Yweh1AnmfQrWJSg_woVKKz5M/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Sekumpul Waterfall, Bali</h3>
+          <p class="video-desc">A dramatic reveal sequence — starting from the top of the waterfall and descending to its base. Demonstrates visual composition, dramatic pacing, and the power of perspective.</p>
+          <div><span class="tag">Cinematic</span><span class="tag">Nature</span><span class="tag">Visual Composition</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/10RfUcy80fbGqPS9jV17SQVR1LESQJE6s/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">The Proposal — A Surprise Documented</h3>
+          <p class="video-desc">A candid capture of an entirely surprise proposal. Preserves the raw, unscripted emotion of the moment — demonstrating the ability to document emotionally charged moments as they unfold.</p>
+          <div><span class="tag">Documentary</span><span class="tag">Candid</span><span class="tag">Emotional Storytelling</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1Z8yalThuHMwPNiC5p7JEoenDiY7se0Y-/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Manali–Spiti Circuit — Road Trip Series</h3>
+          <p class="video-desc">A group road trip through one of India's most dramatic mountain circuits — navigating serene valleys, high-altitude passes, and campsite evenings. Shows the ability to weave people and place into a single visual narrative.</p>
+          <div><span class="tag">Travel</span><span class="tag">Group Documentary</span><span class="tag">Nature</span></div>
+        </div>
+      </div>
+
+      
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1gHyG_vvFuGOqmJMtPoAV3BUXUeNgftbW/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Bridal Transition — Before &amp; After</h3>
+          <p class="video-desc">A creative transition video moving from everyday clothes to bridal couture in a single seamless cut. Demonstrates precision editing, timing, and trending content formats.</p>
+          <div><span class="tag">Transition</span><span class="tag">Creative Editing</span><span class="tag">Trending Format</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1DiSjBfHCjxFJYSdWo12bp6Bj85CSIJ8S/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Sangeet Night — Dance &amp; Celebration</h3>
+          <p class="video-desc">A lively reel combining choreographed dance sequences with candid celebration moments. Intercuts performance footage with behind-the-scenes stills, creating dynamic rhythm between video and photography.</p>
+          <div><span class="tag">Event Coverage</span><span class="tag">Dance</span><span class="tag">Mixed Media</span></div>
+        </div>
+      </div>
+
+      
+      <div class="video-card">
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:#000;">
+          <iframe src="https://drive.google.com/file/d/1LPifyyx9OPRCBFZ5_R5p08nRfDxLJRkx/preview" style="position:absolute;top:0;left:-12%;width:124%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <div class="video-body">
+          <h3 class="video-title">Chandrataal, Himachal Pradesh</h3>
+          <p class="video-desc">A three-part series capturing the remote, ethereal beauty of Chandrataal Lake in the Himalayas. Showcases nature cinematography, atmosphere-building, and multi-part content planning.</p>
+          <div><span class="tag">Series</span><span class="tag">Nature</span><span class="tag">Cinematic</span></div>
+        </div>
+      </div>
+
+      
+    </div><!-- end video-grid -->
+
+    <!-- Tools strip -->
+    <div class="tools-strip">
+      <div class="tools-label">Editing Tools</div>
+      <span class="tool-name">CapCut</span>
+      <span class="tool-name">InShot</span>
+      <span class="tool-name">VN Editor</span>
+      <span class="tool-name">Canva</span>
+      <span class="tool-name">Adobe Suite</span>
+    </div>
+  </section>
+
+  <!-- ── DESIGN SECTION ── -->
+  <section id="design">
+    <div class="section-label">Graphic Design &amp; Campaigns</div>
+    <h2 class="section-title">Social Media Content That Converts</h2>
+    <p class="body-text">
+      From data-driven infographic series to emotionally resonant campaign visuals,
+      I create social media graphics that align with brand identity and audience behaviour.
+      My work at Olcademy contributed to a 45% increase in organic traffic and 30% engagement growth.
+    </p>
+
+    <!-- Case study -->
+    <div class="case-study">
+      <div class="case-label">Case Study</div>
+      <h3 class="case-title">Senior Citizen's Day Campaign — Olcademy</h3>
+      <p class="case-desc">
+        Designed a multi-slide campaign for International Senior Citizen's Day that began with an
+        emotionally resonant awareness poster, then transitioned into a narrative encouraging
+        older adults to join Olcademy as instructors. The content funnel moved from cultural moment
+        → emotional connection → brand call-to-action — demonstrating strategic content thinking
+        alongside visual execution.
+      </p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number">6+</div>
+          <div class="stat-desc">Slides in series</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">45%</div>
+          <div class="stat-desc">Traffic increase at Olcademy</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">30%</div>
+          <div class="stat-desc">Engagement growth</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embedded Slideshows Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; margin-top: 48px;">
+
+      <!-- Senior Citizens Day -->
+      <div style="background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:relative;padding-bottom:57.8%;height:0;overflow:hidden;">
+          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQYImDJyfkhYa28dONlZemDkouj5wpEO8FtdBD177XkGG-AcU3ElyBMm07W6WtdjQ/pubembed?start=true&loop=true&delayms=3000" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px 24px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(196,149,106,0.1);color:var(--accent);border:1px solid rgba(196,149,106,0.2);margin-bottom:10px;">Olcademy</div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px 0;">Senior Citizen's Day Campaign</h4>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0;">Multi-slide awareness campaign transitioning from cultural moment to brand call-to-action. Contributed to 45% organic traffic increase at Olcademy.</p>
+        </div>
+      </div>
+
+      <!-- Youth Facts Infographics -->
+      <div style="background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:relative;padding-bottom:57.8%;height:0;overflow:hidden;">
+          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRvEv_79_8baDoucsuX_IBD-FVyoKcLACpfsZ0yttD_xfQ14jGIbfYqq2j1CY94dQ/pubembed?start=true&loop=true&delayms=3000" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px 24px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(196,149,106,0.1);color:var(--accent);border:1px solid rgba(196,149,106,0.2);margin-bottom:10px;">Olcademy</div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px 0;">Youth Facts Infographic Series</h4>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0;">6-slide data-driven content series presenting key statistics on Indian youth. Demonstrates ability to translate research into visually engaging social media content.</p>
+        </div>
+      </div>
+
+      <!-- International Youth Day -->
+      <div style="background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:relative;padding-bottom:57.8%;height:0;overflow:hidden;">
+          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSiodoD1j3gXJqC9Z_HdU94QqHX3vmeSUpZHLXG7aka54EaCSCRfB2A3-fq7qGIXg/pubembed?start=true&loop=true&delayms=3000" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px 24px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(196,149,106,0.1);color:var(--accent);border:1px solid rgba(196,149,106,0.2);margin-bottom:10px;">Olcademy</div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px 0;">International Youth Day</h4>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0;">Celebratory social media campaign with brand-integrated visuals. Clean, high-engagement format designed for organic reach on Instagram and LinkedIn.</p>
+        </div>
+      </div>
+
+      <!-- Phil Collins Quote Campaign -->
+      <div style="background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:relative;padding-bottom:57.8%;height:0;overflow:hidden;">
+          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTqUQbUkWxsnuJfiTWbPBiZr8ZKfaR392vMMam77CkY6oQHOk5JuaR2VdaHWXr_lg/pubembed?start=true&loop=true&delayms=3000" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px 24px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(196,149,106,0.1);color:var(--accent);border:1px solid rgba(196,149,106,0.2);margin-bottom:10px;">Olcademy</div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px 0;">Phil Collins Quote Campaign</h4>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0;">Two-slide brand messaging campaign pairing an inspirational quote with Olcademy's platform value proposition. Demonstrates copy-to-visual storytelling.</p>
+        </div>
+      </div>
+
+      <!-- World Mental Health Day -->
+      <div style="background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:relative;padding-bottom:100%;height:0;overflow:hidden;">
+          <iframe src="https://drive.google.com/file/d/1DyiF5vfht7JrLMsDVfpP--Ty6HIKa0y-/preview" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px 24px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(196,149,106,0.1);color:var(--accent);border:1px solid rgba(196,149,106,0.2);margin-bottom:10px;">Spark Creations</div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px 0;">World Mental Health Day</h4>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0;">Awareness campaign poster for Spark Creations. Socially conscious design with a clear, emotionally resonant message aligned with the campaign's purpose.</p>
+        </div>
+      </div>
+
+      <!-- World Photography Day -->
+      <div style="background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:relative;padding-bottom:100%;height:0;overflow:hidden;">
+          <iframe src="https://drive.google.com/file/d/1NN2K6uSc7TbNEkrvwUsT9LgoIUhatr5l/preview" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px 24px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(196,149,106,0.1);color:var(--accent);border:1px solid rgba(196,149,106,0.2);margin-bottom:10px;">Spark Creations</div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px 0;">World Photography Day</h4>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0;">Celebratory poster for World Photography Day. Clean visual design with strong brand identity for Spark Creations, KIET's Official Fashion Club.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── WRITING SECTION ── -->
+  <section id="writing">
+    <div class="section-label">Writing &amp; Creative Expression</div>
+    <h2 class="section-title light">Words, Art &amp; Imagination</h2>
+    <p class="body-text light">
+      Beyond video and design, I'm a writer, poet, and visual artist. My creative practice
+      spans long-form fiction, poetry, micro-stories, and original artwork — all rooted in
+      emotional observation and storytelling.
+    </p>
+
+    <div class="writing-grid">
+      <div class="writing-card">
+        <div class="writing-type">WordPress Blog</div>
+        <h3 class="writing-title">Saumya's Blog</h3>
+        <p class="writing-desc">
+          Long-form creative writing including fiction, reflective essays, and descriptive prose.
+          Features stories like "My Latte with Little Sugar," "Demise in Disguise," and
+          "The Uncanny Cemetery" — each demonstrating narrative structure, emotional depth,
+          and vivid descriptive writing.
+        </p>
+        <a href="https://saumyaimprints.home.blog" target="_blank" rel="noopener noreferrer" class="btn-ghost">Visit Blog →</a>
+      </div>
+
+      <div class="writing-card">
+        <div class="writing-type">Instagram</div>
+        <h3 class="writing-title">@inkaddict_</h3>
+        <p class="writing-desc">
+          A curated Instagram page dedicated to poetry, micro-fiction, motivational writing,
+          and creative visual storytelling. Each post pairs original words with intentional
+          visual design for digital-first audiences.
+        </p>
+        <a href="https://instagram.com/inkaddict_" target="_blank" rel="noopener noreferrer" class="btn-ghost">Visit Page →</a>
+      </div>
+
+      <div class="writing-card">
+        <div class="writing-type">Published Author</div>
+        <h3 class="writing-title">Insatiable Flames of Logomaniacs</h3>
+        <p class="writing-desc">
+          Co-authored at IvoryQuill Publications. Featured poem: "Some Things Left Unsaid."
+          Published in a multi-author anthology, demonstrating the ability to craft
+          emotionally resonant writing that meets editorial standards.
+        </p>
+        <div class="writing-meta">IvoryQuill Publications, 2020–2021</div>
+      </div>
+
+      <div class="writing-card">
+        <div class="writing-type">Visual Art</div>
+        <h3 class="writing-title">Painting &amp; Drawing</h3>
+        <p class="writing-desc">
+          Original paintings and drawings that inform my visual eye and sense of composition.
+          This artistic foundation shapes how I frame shots, choose colour palettes, and
+          compose visual narratives across all my content work.
+        </p>
+        <div style="margin-top: 16px; border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; position: relative;">
+          <iframe src="https://drive.google.com/file/d/166tdpeuUiyMklOYJPsTIvHpokliSXesr/preview" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT SECTION ── -->
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Creative Mind,<br />Analytical Brain</h2>
+        <p class="body-text">
+          I'm Saumya Jaiswal — a content creator, writer, and data science student at
+          King's College London. My unique strength lies in bridging the creative and
+          analytical: I produce content that isn't just visually compelling but is informed
+          by audience insights, platform behaviour, and strategic thinking.
+        </p>
+        <p class="body-text">
+          As Chairperson and Content &amp; PR Head of Spark Creations (KIET's Official Fashion Club),
+          I led a team of 50+ members across content strategy, social media, event coverage,
+          and promotional video production. My internship at Olcademy saw me create blogs,
+          social campaigns, multimedia content, and SEO-optimised copy that drove measurable results.
+        </p>
+        <p class="body-text">
+          Outside of professional work, I'm a published poet, a travel filmmaker who documents
+          the places and cultures I experience, and a visual artist. Every piece of content I
+          create is rooted in genuine curiosity about people and their stories.
+        </p>
+      </div>
+
+      <div>
+        <div class="exp-label">Experience</div>
+
+        <div class="timeline-item current">
+          <div class="timeline-period">Sep 2025 – Present</div>
+          <div class="timeline-role">MSc Data Science</div>
+          <div class="timeline-org">King's College London</div>
+          <div class="timeline-detail">Student Ambassador, NMES 50 cohort</div>
+        </div>
+
+        <div class="timeline-item past">
+          <div class="timeline-period">Apr – Jul 2025</div>
+          <div class="timeline-role">Data Analytics Intern</div>
+          <div class="timeline-org">HDFC Asset Management</div>
+          <div class="timeline-detail">AWS solutions, Power BI dashboards</div>
+        </div>
+
+        <div class="timeline-item past">
+          <div class="timeline-period">Jul 2022 – Jan 2025</div>
+          <div class="timeline-role">Senior Software Engineer</div>
+          <div class="timeline-org">Ultimate Kronos Group</div>
+          <div class="timeline-detail">JAVA, Agile, cross-functional delivery</div>
+        </div>
+
+        <div class="timeline-item past">
+          <div class="timeline-period">Dec 2020 – May 2022</div>
+          <div class="timeline-role">Chairperson &amp; Content Head</div>
+          <div class="timeline-org">Spark Creations, KIET</div>
+          <div class="timeline-detail">Led 50+ members, content strategy, video production</div>
+        </div>
+
+        <div class="timeline-item past">
+          <div class="timeline-period">Jul – Sep 2020</div>
+          <div class="timeline-role">Content Writer &amp; Copywriter</div>
+          <div class="timeline-org">Olcademy (EdTech)</div>
+          <div class="timeline-detail">SEO, blogs, social campaigns, +45% organic traffic</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT SECTION ── -->
+  <section id="contact">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="contact-title">
+      Ready to create something<br />
+      <em>meaningful</em> together?
+    </h2>
+    <p class="contact-sub">
+      I'm currently based in London, UK and available for part-time content creation
+      roles, freelance video projects, and collaborative storytelling opportunities.
+    </p>
+    <div class="contact-btns">
+      <a href="mailto:saumya.jaiswal@kcl.ac.uk" class="btn-accent">saumya.jaiswal@kcl.ac.uk</a>
+      <a href="https://linkedin.com/in/saumyajaiswal" target="_blank" rel="noopener noreferrer" class="btn-outline-white">LinkedIn →</a>
+    </div>
+    <div class="contact-links">
+      <a href="https://saumyaimprints.home.blog" target="_blank" rel="noopener noreferrer">Blog</a>
+      <a href="https://instagram.com/inkaddict_" target="_blank" rel="noopener noreferrer">Poetry</a>
+      <a href="https://linkedin.com/in/saumyajaiswal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-text">© 2026 Saumya Jaiswal. All rights reserved.</div>
+    <div class="footer-text">London, UK</div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 80);
+      updateActiveNav();
+    });
+
+    const sections = ['home','video','design','writing','about','contact'];
+    function updateActiveNav() {
+      let current = 'home';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 100) current = id;
+      });
+      document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    updateActiveNav();
+  </script>
+</body>
+</html>
